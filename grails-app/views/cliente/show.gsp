@@ -102,16 +102,7 @@
 						<span class="property-value" aria-labelledby="correo-label"><g:fieldValue bean="${clienteInstance}" field="correo"/></span>
 					
 				</li>
-				</g:if>
-			
-				<g:if test="${clienteInstance?.base}">
-				<li class="fieldcontain">
-					<span id="base-label" class="property-label"><g:message code="cliente.base.label" default="Base" /></span>
-					
-						<span class="property-value" aria-labelledby="base-label"><g:formatBoolean boolean="${clienteInstance?.base}" /></span>
-					
-				</li>
-				</g:if>
+				</g:if>			
 			
 				<g:if test="${clienteInstance?.empresa}">
 				<li class="fieldcontain">

@@ -26,14 +26,6 @@
 	<g:field type="number" name="margenUtilidad" required="" value="${fieldValue(bean: tipoClienteInstance, field: 'margenUtilidad')}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: tipoClienteInstance, field: 'base', 'error')} ">
-	<label for="base">
-		<g:message code="tipoCliente.base.label" default="Base" />
-		
-	</label>
-	<g:checkBox name="base" value="${tipoClienteInstance?.base}" />
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: tipoClienteInstance, field: 'empresa', 'error')} required">
 	<label for="empresa">
 		<g:message code="tipoCliente.empresa.label" default="Empresa" />

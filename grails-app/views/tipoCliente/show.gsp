@@ -48,17 +48,8 @@
 						<span class="property-value" aria-labelledby="margenUtilidad-label"><g:fieldValue bean="${tipoClienteInstance}" field="margenUtilidad"/></span>
 					
 				</li>
-				</g:if>
-			
-				<g:if test="${tipoClienteInstance?.base}">
-				<li class="fieldcontain">
-					<span id="base-label" class="property-label"><g:message code="tipoCliente.base.label" default="Base" /></span>
-					
-						<span class="property-value" aria-labelledby="base-label"><g:formatBoolean boolean="${tipoClienteInstance?.base}" /></span>
-					
-				</li>
-				</g:if>
-			
+				</g:if>		
+							
 				<g:if test="${tipoClienteInstance?.empresa}">
 				<li class="fieldcontain">
 					<span id="empresa-label" class="property-label"><g:message code="tipoCliente.empresa.label" default="Empresa" /></span>

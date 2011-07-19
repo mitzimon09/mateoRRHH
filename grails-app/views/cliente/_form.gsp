@@ -74,14 +74,6 @@
 	<g:field type="email" name="correo" maxlength="128" value="${clienteInstance?.correo}"/>
 </div>
 
-<div class="fieldcontain ${hasErrors(bean: clienteInstance, field: 'base', 'error')} ">
-	<label for="base">
-		<g:message code="cliente.base.label" default="Base" />
-		
-	</label>
-	<g:checkBox name="base" value="${clienteInstance?.base}" />
-</div>
-
 <div class="fieldcontain ${hasErrors(bean: clienteInstance, field: 'empresa', 'error')} required">
 	<label for="empresa">
 		<g:message code="cliente.empresa.label" default="Empresa" />

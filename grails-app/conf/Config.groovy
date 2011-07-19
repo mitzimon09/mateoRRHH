@@ -93,7 +93,7 @@ log4j = {
 
     warn   'org.mortbay.log'
 
-    debug  'grails.app'
+    debug  'grails.app','test.integration'
 
     //trace  'org.hibernate.type'
 
@@ -101,12 +101,12 @@ log4j = {
            'grails.app.taglib.org.grails.plugin.resource',
            'grails.app.resourceMappers.org.grails.plugin.resource'
 }
-
+/*
 grails.gorm.default.mapping = {
    cache true
    id generator:'identity'
 }
-
+*/
 grails.gorm.failOnError = true
 
 // Added by the Spring Security Core plugin:
