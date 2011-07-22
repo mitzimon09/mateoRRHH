@@ -38,16 +38,31 @@ class Empleado {
         fechaNacimiento column:'fechanacimiento'
         
     }   
-        static namedQueries = {
-        listaEmpleadoByTipoYEmpresa{empresaId,tipoId ->
-            //log.debug "tipo $tipoId empresa $empresaId"
-            empleadoLaborales{
-                tipo{
-                    idEq(tipoId)
+    static namedQueries = {
+        listaEmpleadosParametros{Empleado empleado ->
+            //Valida que el usuario no venga null
+            if(empleado){
+                //Valida el status
+                if(empleado.status){                    
+                    eq 'status',empleado.status                    
+                }               
+                
+                if(empleado.empleadoLaborales){
+                    empleadoLaborales{
+                        if(empleado.empleadoLaborales.tipo){
+                            tipo{
+                                if(empleado.empleadoLaborales.tipo.id){
+                                    idEq(empleado.empleadoLaborales.tipo.id)   
+                                }                            
+                            }                            
+                        }                        
+                    }
+                }                
+                if(empleado.empresa){
+                    empresa{
+                        idEq(empleado.empresa.id)
+                    }
                 }
-            }
-            empresa{
-                idEq(empresaId)            
             }
         }        
     }

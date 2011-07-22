@@ -40,5 +40,61 @@ class EmpleadoControllerIntegrationTests extends BaseIntegrationTest{
         }catch (NullPointerException npe){            
             assertEquals "empleado.inexistente",npe.message
         }       
-    }    
+    }
+    
+    @Test
+    void debieraTraerEmpleadosByEmpresaAndTipo(){
+        log.debug "debieraTraerEmpleadosByEmpresaAndTipo"
+        //def empresaId=102
+        //def tipoId=1
+        def empresa=Empresa.get(102)
+        def tipo=TipoEmpleado.get(1)
+        assertEquals tipo.descripcion,"DENOMINACIONAL"
+        assertEquals empresa.nombre,"CENTRAL"
+        def empleados=empleadoServiceInt.getEmpleadosByEmpresaAndTipo(empresa,tipo)
+        for(Empleado empleado in empleados){            
+            assertEquals 1,empleado.empleadoLaborales.tipo.id
+            assertEquals 102,empleado.empresa.id
+        }
+        assertEquals 432,empleados.size()  
+    }
+    @Test
+    void debieraTraerCeroEmpleadosByEmpresaAndTipo(){
+        log.debug "debieraTraerEmpleadosByEmpresaAndTipo"
+        //def empresaId=102
+        //def tipoId=1
+        def empresa=Empresa.get(121)
+        def tipo=TipoEmpleado.get(1)
+        assertEquals tipo.descripcion,"DENOMINACIONAL"
+        assertEquals empresa.nombre,"Prueba"
+        def empleados=empleadoServiceInt.getEmpleadosByEmpresaAndTipo(empresa,tipo)
+        for(Empleado empleado in empleados){
+            assertEquals empleado.empleadoLaborales.tipo.id,1      
+            assertEquals empleado.empresa.id,121
+        }
+        assertEquals 0,empleados.size()
+    }
+    
+    @Test
+    void debieraTraerEmpleadosByTipo(){
+        log.debug "debieraTraerEmpleadosByTipo"
+        def tipo=TipoEmpleado.get(1)
+        assertEquals tipo.descripcion,"DENOMINACIONAL"
+        def empleados=empleadoServiceInt.getEmpleadosByTipo(tipo)
+        for(Empleado empleado in empleados){
+            assertEquals empleado.empleadoLaborales.tipo.id,1
+        }
+        assertEquals 432,empleados.size()
+    }
+    
+    @Test
+    void debieraTraerEmpleadosByEmpresa(){
+        def empresa=Empresa.get(102)
+        assertEquals empresa.nombre,"CENTRAL"
+        def empleados=empleadoServiceInt.getEmpleadosByEmpresa(empresa)
+        for(Empleado empleado in empleados){      
+            assertEquals empleado.empresa.id,102
+        }
+        assertEquals 601,empleados.size()  
+    }
 }
