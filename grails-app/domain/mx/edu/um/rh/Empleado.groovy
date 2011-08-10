@@ -12,8 +12,9 @@ class Empleado {
     String status
     EmpleadoPersonales empleadoPersonales
     EmpleadoLaborales empleadoLaborales
+    Map perdeds
+    static hasMany=[perdeds:EmpleadoPerded]
     
-    //static belonsgTo=[empleadoPersonales:EmpleadoPersonales]
     
     
     public String getNombreCompleto(){

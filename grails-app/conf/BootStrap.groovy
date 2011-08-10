@@ -71,7 +71,7 @@ class BootStrap {
             admin.save(flush:true)
             general.UsuarioRol.create(admin, rolAdmin, true)
         }
-
+        
         log.info("Aplicacion inicializada")
     }
 

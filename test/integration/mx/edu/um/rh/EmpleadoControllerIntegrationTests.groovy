@@ -19,6 +19,7 @@ class EmpleadoControllerIntegrationTests extends BaseIntegrationTest{
     /*
      *Esta Prueba no corre en el controller prueba la funcionalidad del service
      */
+    /*
     @Test
     void debieraTraerUnEmpleadoPorClaveANivelService(){
         log.debug "test EmpleadoByClave"
@@ -30,7 +31,7 @@ class EmpleadoControllerIntegrationTests extends BaseIntegrationTest{
         assertEquals 'OSUNA',empleado.apMaterno
         assertEquals 139,empleado.id
     }
-        
+            
     @Test
     void debieraMarcarErrorEmpleadoPorClaveANivelService(){
         log.debug "test EmpleadoByClave"
@@ -41,7 +42,7 @@ class EmpleadoControllerIntegrationTests extends BaseIntegrationTest{
             assertEquals "empleado.inexistente",npe.message
         }       
     }
-    
+        
     @Test
     void debieraTraerEmpleadosByEmpresaAndTipo(){
         log.debug "debieraTraerEmpleadosByEmpresaAndTipo"
@@ -74,7 +75,7 @@ class EmpleadoControllerIntegrationTests extends BaseIntegrationTest{
         }
         assertEquals 0,empleados.size()
     }
-    
+       
     @Test
     void debieraTraerEmpleadosByTipo(){
         log.debug "debieraTraerEmpleadosByTipo"
@@ -86,7 +87,7 @@ class EmpleadoControllerIntegrationTests extends BaseIntegrationTest{
         }
         assertEquals 432,empleados.size()
     }
-    
+        
     @Test
     void debieraTraerEmpleadosByEmpresa(){
         def empresa=Empresa.get(102)
@@ -97,4 +98,127 @@ class EmpleadoControllerIntegrationTests extends BaseIntegrationTest{
         }
         assertEquals 601,empleados.size()  
     }
+    */
+    /*
+     *Seccion de Leer Las Perdeds del empleado
+     */
+    @Test
+    void debieraLeerPercepcionesDeduccionesEmpleado(){
+        def clave="9800052"
+        def empleado=empleadoServiceInt.getEmpleado(clave)
+        assertEquals 139,empleado.id
+        System.out.println("==================="+empleado.perdeds)
+        System.out.println("==================="+empleado.perdeds.size())
+        assertNotNull empleado.perdeds
+        assertEquals 8,empleado.perdeds.size()
+        Map empleadoPerdeds=empleado.perdeds
+        //EmpleadoPerded emperd=empleadoPerdeds
+        System.out.println("=================== "+empleadoPerdeds.containsKey('1'))
+        //assertNotNull emperd
+        //System.out.println("=================== "+emperd.empleado.id)
+        //assertEquals '%',emperd.tipoImporte
+        //assertEquals 100,emperd.importe
+        //assertEquals 'D,PS,BN',emperd.atributos
+    }
+        /*
+    @Test
+    void debieraGuardarPercecionesDeducciones(){
+        def clave="9800052"
+        def empleado=empleadoServiceInt.getEmpleado(clave)
+        assertEquals 139,empleado.id
+        PerDed perded=PerDed.get(1)
+        assertEquals "Salario",perded.nombre
+        def empleadoPerded=new EmpleadoPerded()
+        empleadoPerded.importe=new BigDecimal("100")
+        empleadoPerded.otorgado=false
+        empleadoPerded.isEditableByNOM=false
+        empleadoPerded.tipoImporte="%"
+        empleadoPerded.atributos ="D,PS,BN"
+        empleadoPerded.perded=perded
+        empleadoPerded.empleado=empleado
+        assertNull empleadoPerded.id
+        empleadoPerded.save()
+        assertNotNull empleadoPerded
+        assertNotNull empleadoPerded.id
+        System.out.println("-------------->"+empleadoPerded.id+"<--------------")
+    }
+    
+    
+    @Test
+    void debieraModificarPercecionesDeducciones(){
+        def clave="9800052"
+        def empleado=empleadoServiceInt.getEmpleado(clave)
+        assertEquals 139,empleado.id
+        List percepcionesEmpleados=empleado.perdeds.toList()
+        assertEquals 8,percepcionesEmpleados.size()
+        for(EmpleadoPerded emperded:percepcionesEmpleados ){
+            assertNotNull emperded
+            assertNotNull emperded.id
+            emperded.atributos="B,N"
+            emperded.save()
+            assertNotNull emperded
+        }
+        percepcionesEmpleados=null
+        percepcionesEmpleados=empleado.perdeds.toList()
+        assertEquals 8,percepcionesEmpleados.size()
+        for(EmpleadoPerded emperded:percepcionesEmpleados ){
+            assertNotNull emperded
+            assertNotNull emperded.id
+            assertEquals "B,N",emperded.atributos
+                
+        }        
+    }        
+    @Test
+    void debieraLeerFormula(){
+        def clave="9800052"
+        def empleado=empleadoServiceInt.getEmpleado(clave)
+        assertEquals 139,empleado.id
+        List percepcionesEmpleados=empleado.perdeds.toList()
+        assertEquals 8,percepcionesEmpleados.size()
+        for(EmpleadoPerded emperded:percepcionesEmpleados ){
+            assertNotNull emperded
+            assertNotNull emperded.id
+            System.out.println("------"+emperded.perded+"----")
+            assertNotNull emperded.perded
+            assertNotNull emperded.perded.formula
+            assertEquals '-',emperded.perded.formula            
+        }        
+    }
+    @Test
+    void debieraModificarFormula(){
+        def clave="9800052"
+        def empleado=empleadoServiceInt.getEmpleado(clave)
+        assertEquals 139,empleado.id
+        List percepcionesEmpleados=empleado.perdeds.toList()
+        assertEquals 8,percepcionesEmpleados.size()
+        for(EmpleadoPerded emperded:percepcionesEmpleados ){
+            assertNotNull emperded
+            assertNotNull emperded.id
+            System.out.println("------"+emperded.perded+"----")
+            assertNotNull emperded.perded
+            assertNotNull emperded.perded.formula
+            if(emperded.perded.id==1){
+                emperded.perded.formula='P1*P3'                
+                emperded.perded.save()
+                assertNotNull emperded.perded
+            }
+                
+        }        
+        percepcionesEmpleados=empleado.perdeds.toList()
+        assertEquals 8,percepcionesEmpleados.size()
+        for(EmpleadoPerded emperded:percepcionesEmpleados ){
+            assertNotNull emperded
+            assertNotNull emperded.id
+            System.out.println("------"+emperded.perded+"----")
+            assertNotNull emperded.perded
+            assertNotNull emperded.perded.formula
+            if(emperded.perded.id==1){
+                assertEquals 'P1*P3',emperded.perded.formula
+            }else{
+                assertEquals '-',emperded.perded.formula                
+            }
+                
+        }        
+    }
+    */
 }

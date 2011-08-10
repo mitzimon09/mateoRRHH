@@ -19,6 +19,7 @@ class EmpleadoLaborales {
     Date fechaAntiguedadBase
     BigDecimal antiguedadBase
     BigDecimal antiguedadFiscal
+    Grupo grupo
     
     
     static constraints = {
@@ -38,6 +39,7 @@ class EmpleadoLaborales {
         table name:'empleadolaborales',schema:'aron'
         experienciaFueraUM column:'experiencia_fuera_um'
         tipo column:'id_tipoempleado'
+        grupo column:'id_grupo'
         adventista type:'yes_no'
         id generator:'foreign',params:[property:'empleado']
     }
